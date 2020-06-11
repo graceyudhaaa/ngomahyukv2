@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>static/289225d1d1c5f1.jpg</file>
+        <file>static/4228_1.jpg</file>
+        <file>static/Bisnis-kos-kosan.png</file>
+        <file>static/header.png</file>
+        <file>static/kos1.jpg</file>
+        <file>static/kos2.jpg</file>
+        <file>static/kosku.jpg</file>
+        <file>static/kosku1.jpg</file>
+        <file>static/kosku2.jpg</file>
+        <file>static/kost.jpg</file>
+        <file>static/rumah-kost-mahasiswa-dekat-undip-di-tembalang-selatan-semarang.jpg</file>
+        <file>ngomahyuk.db</file>
+        <file>PageBackground.qml</file>
+        <file>Kos.qml</file>
+        <file>Kontrakan.qml</file>
+    </qresource>
+</RCC>
