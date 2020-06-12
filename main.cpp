@@ -8,12 +8,14 @@
 #include <iostream>
 #include <string>
 
-void databaseConnection(const char* DBType, const char* DBPath){
+QSqlDatabase databaseConnection(const char* DBType, const char* DBPath){
     QSqlDatabase db = QSqlDatabase::addDatabase(DBType);
     db.setDatabaseName(DBPath);
     if (db.open()){
         std::cout<<"database connection success"<<std::endl;
     }
+
+    return db;
 }
 
 
