@@ -22,7 +22,7 @@ QSqlDatabase databaseConnection(const char* DBType, const char* DBPath){
 int main(int argc, char *argv[])
 {
     //    open connect to database
-    databaseConnection("QSQLITE", "ngomahyuk.db");
+    QSqlDatabase db = databaseConnection("QSQLITE", "ngomahyuk.db");
 
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
