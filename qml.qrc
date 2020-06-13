@@ -16,5 +16,6 @@
         <file>PageBackground.qml</file>
         <file>Kos.qml</file>
         <file>Kontrakan.qml</file>
+        <file>listviewitem.qml</file>
     </qresource>
 </RCC>
