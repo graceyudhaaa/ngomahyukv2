@@ -1,10 +1,28 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>ngomahyuk.db</file>
+        <file>PageBackground.qml</file>
+        <file>Kos.qml</file>
+        <file>Kontrakan.qml</file>
+        <file>KosPerempuan.qml</file>
+        <file>KontrakanSpec.qml</file>
+        <file>KontrakanSpec1.qml</file>
+        <file>KontrakanSpec2.qml</file>
+        <file>KosSpec.qml</file>
+        <file>KosSpec1.qml</file>
+        <file>KosSpec2.qml</file>
+        <file>KosSpecFemale.qml</file>
+        <file>KosSpecFemale1.qml</file>
+        <file>KosSpecFemale2.qml</file>
+        <file>listviewitemkon.qml</file>
         <file>static/289225d1d1c5f1.jpg</file>
         <file>static/4228_1.jpg</file>
         <file>static/Bisnis-kos-kosan.png</file>
         <file>static/header.png</file>
+        <file>static/kontrakan1.jfif</file>
+        <file>static/kontrakan2.jpg</file>
+        <file>static/kontrakan3.jpg</file>
         <file>static/kos1.jpg</file>
         <file>static/kos2.jpg</file>
         <file>static/kosku.jpg</file>
@@ -12,11 +30,5 @@
         <file>static/kosku2.jpg</file>
         <file>static/kost.jpg</file>
         <file>static/rumah-kost-mahasiswa-dekat-undip-di-tembalang-selatan-semarang.jpg</file>
-        <file>ngomahyuk.db</file>
-        <file>PageBackground.qml</file>
-        <file>Kos.qml</file>
-        <file>Kontrakan.qml</file>
-        <file>listviewitem.qml</file>
-        <file>KosPerempuan.qml</file>
     </qresource>
 </RCC>

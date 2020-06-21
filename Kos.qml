@@ -38,6 +38,7 @@ PageBackground {
         y: 87
         width: 640
         height: 410
+        clip: true
         model: ListModel{
 //            need to be in for loop and data from database
            ListElement{

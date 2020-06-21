@@ -1,7 +1,6 @@
 import QtQuick 2.5
 import QtQuick.Controls 2.5
-
-
+import QtQuick.Dialogs 1.1
 
 ApplicationWindow {
     id: applicationWindow
@@ -32,6 +31,40 @@ ApplicationWindow {
         anchors.right: parent.right
         anchors.rightMargin: 0
         source: "static/header.png"
+        Button {
+            id: buttonHubungi
+            x: 526
+            y: 14
+            width: 96
+            height: 35
+            font.family: "Verdana"
+            visible: true
+            contentItem: Text {
+                id: name1
+                color: "#fff"
+                text: "EXIT"
+                anchors.fill: parent
+                font.bold: true
+                font.pointSize: 10
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+            }
+            background: Rectangle {
+                color: "#00f1f0f0"
+                border.width: 4
+                border.color: "#fff"
+                anchors.fill: parent
+            }
+            font.pixelSize: 16
+
+            MouseArea {
+                id: mouseAreaHubungi
+                anchors.fill: parent
+                onClicked: {
+                    Qt.quit()
+                }
+            }
+        }
 
     }
 
@@ -60,7 +93,7 @@ ApplicationWindow {
         MouseArea{
             anchors.fill: parent
             onClicked:{
-                if (textFieldHarga.text === " "){
+                if (textFieldHarga.text === ""){
                     kosPrice = 0
                 } else {
                     kosPrice = parseInt(textFieldHarga.text)
@@ -70,16 +103,29 @@ ApplicationWindow {
                 kosloader.active = true
                 kosloader.visible = true
 
-                if (kosGenderType == "Laki-laki"){
-                kosloader.source = "Kos.qml"
-               }else {
-                   kosloader.source = "KosPerempuan.qml"
-               }
+                if (kosGenderType == "Laki-laki" && kosPrice >= 7350000){
+                    kosloader.source = "Kos.qml"
+                }else if (kosGenderType == "Perempuan" && kosPrice >= 7350000){
+                    kosloader.source = "KosPerempuan.qml"
+                }else {
+                    alertDialogKos.open()
+                }
+
+
                 console.log(kosPrice)
                 console.log(kosGenderType)
             }
         }
 
+        MessageDialog{
+            id: alertDialogKos
+            modality: Qt.ApplicationModal
+            title: "Dana Kurang"
+            text: "Dana yang dimasukan tidak mencukupi."
+            onAccepted: {
+                alertDialogKos.close()
+            }
+        }
 
         background: Rectangle {
             id: background
@@ -235,7 +281,7 @@ ApplicationWindow {
         anchors.topMargin: 138
         anchors.left: toolSeparator.right
         anchors.leftMargin: 100
-        placeholderText: ""
+        placeholderText: "Kosongkan jika tidak tertentu"
     }
 
     Button {
@@ -281,12 +327,28 @@ ApplicationWindow {
                 } else {
                     kontrakanJumlahKamar = parseInt(textFieldJumlahKamar.text)
                 }
+
+                if (kontrakanPrice >= 35000000){
+                    kontrakanloader.source = "Kontrakan.qml"
+                }else {
+                    alertDialogKontrakan.open()
+                }
+
                 kontrakanloader.active = true
                 kontrakanloader.visible = true
-                kontrakanloader.source = "Kontrakan.qml"
                 console.log(kontrakanPrice)
                 console.log(kontrakanJumlahKamar)
             }
+        }
+    }
+
+    MessageDialog{
+        id: alertDialogKontrakan
+        modality: Qt.ApplicationModal
+        title: "Dana Kurang"
+        text: "Dana yang dimasukan tidak mencukupi."
+        onAccepted: {
+            alertDialogKontrakan.close()
         }
     }
 
