@@ -17,5 +17,6 @@
         <file>Kos.qml</file>
         <file>Kontrakan.qml</file>
         <file>listviewitem.qml</file>
+        <file>KosPerempuan.qml</file>
     </qresource>
 </RCC>

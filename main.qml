@@ -60,19 +60,24 @@ ApplicationWindow {
         MouseArea{
             anchors.fill: parent
             onClicked:{
-                if (textFieldHarga.text === ""){
+                if (textFieldHarga.text === " "){
                     kosPrice = 0
                 } else {
                     kosPrice = parseInt(textFieldHarga.text)
                 }
+
                 kosGenderType = comboBoxGender.currentText
                 kosloader.active = true
                 kosloader.visible = true
+
+                if (kosGenderType == "Laki-laki"){
                 kosloader.source = "Kos.qml"
+               }else {
+                   kosloader.source = "KosPerempuan.qml"
+               }
                 console.log(kosPrice)
                 console.log(kosGenderType)
             }
-
         }
 
 
