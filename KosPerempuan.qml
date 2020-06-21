@@ -41,33 +41,33 @@ PageBackground {
         model: ListModel{
 //            need to be in for loop and data from database
            ListElement{
-                imagePath : "static/Bisnis-kos-kosan.png"
+                imagePath : "static/kos1.jpg"
                 kosName : "Kos Lorem"
-                kosAlamat : "Jalan Lorem, No. 01 RT6/RW1"
+                kosAlamat : "Jalan Lorem, No. 111 RT1/RW12"
                 kosJumlahKamar: "15"
-                kosGender : "Laki-laki"
-                kosHarga: "Rp.7.350.000"
-                kosProfile: "KosSpec.qml"
+                kosGender : "Perempuan"
+                kosHarga: "Rp.7.200.000"
+                kosProfile: "KosSpecFemale.qml"
                 ownerContact: "https://www.instagram.com/sandi.laa/?hl=id"
             }
            ListElement{
-                imagePath : "static/kosku.jpg"
+                imagePath : "static/kos2.jpg"
                 kosName : "Kos Dolor"
-                kosAlamat : "Jalan Dolor, No. 12 RT1/RW12"
+                kosAlamat : "Jalan Dolor, No. 21 RT3/RW1"
                 kosJumlahKamar: "13"
-                kosGender : "Laki-laki"
-                kosHarga: "Rp.7.100.000"
-                kosProfile: "KosSpec1.qml"
+                kosGender : "Perempuan"
+                kosHarga: "Rp.7.350.000"
+                kosProfile: "KosSpecFemale1.qml"
                 ownerContact: "https://www.instagram.com/graceyudha/?hl=id"
             }
            ListElement{
-                imagePath : "static/kosku1.jpg"
+                imagePath : "static/kost.jpg"
                 kosName : "Kos Ipsum"
-                kosAlamat : "Jalan Ipsum, No. 666 RT3/RW1"
+                kosAlamat : "Jalan Ipsum, No. 5 RT2/RW14"
                 kosJumlahKamar: "14"
-                kosGender : "Laki-laki"
-                kosHarga: "Rp.7.000.000"
-                kosProfile: "KosSpec2.qml"
+                kosGender : "Perempuan"
+                kosHarga: "Rp.7.150.000"
+                kosProfile: "KosSpecFemale2.qml"
                 ownerContact: "https://www.instagram.com/wandaalifh/?hl=id"
             }
         }
@@ -176,8 +176,8 @@ PageBackground {
                     id: mouseAreaCek
                     anchors.fill: parent
                     onClicked: {
-                        kosspec.visible = true
-                        kosspec.source = kosProfile
+                        kosspecfemale.visible = true
+                        kosspecfemale.source = kosProfile
                     }
                 }
 
@@ -232,19 +232,20 @@ PageBackground {
     }
 
     Loader{
-        id: kosspec
+        id: kosspecfemale
         visible: false
-        source: "KosSpec.qml"
+        source: "KosSpecFemale.qml"
     }
     Loader{
-        id: kosspec1
+        id: kosspecfemale1
         visible: false
-        source: "KosSpec1.qml"
+        source: "KosSpecFemale1.qml"
     }
     Loader{
-        id: kosspec2
+        id: kosspecfemale2
         visible: false
-        source: "KosSpec2.qml"
+        source: "KosSpecFemale2.qml"
     }
 }
+
 
