@@ -12,4 +12,4 @@ Ngomahyuk is BnB and renting management build with QT and Felgo as a project for
   https://github.com/sandilokaa/
 
 ## Final Version
-You can download the final version at this [link.](https://drive.google.com/file/d/1GhhotRL_-wdOGq82OKE-kxy78oBpE0gU/view?usp=sharing). 
+You can download the final version at this [link](https://drive.google.com/file/d/1GhhotRL_-wdOGq82OKE-kxy78oBpE0gU/view?usp=sharing).
