@@ -35,16 +35,31 @@ ApplicationWindow {
             for (var i = 0; i < Storage.kos.length; i++){
                 try {
                     tx.executeSql("INSERT INTO kos (namakos, alamat, jumlahKamar, gender, harga, owner, desk)
-                                VALUES ('"+Storage.kos[i]['nama']+"','"+Storage.kos[i]['alamat']+"',"+Storage.kos[i]['jumlahKamar']+",'"+Storage.kos[i]['gender']+"',"+Storage.kos[i]['harga']+",'"+Storage.kos[i]['owner']+"','"+Storage.kos[i]['desk']+"');");
+                                VALUES ('"+Storage.kos[i]['nama']+"','"+Storage.kos[i]['alamat']+"',"
+                                +Storage.kos[i]['jumlahKamar']+",'"+Storage.kos[i]['gender']+"',"
+                                +Storage.kos[i]['harga']+",'"+Storage.kos[i]['owner']
+                                +"','"+Storage.kos[i]['desk']+"');");
 
-                    tx.executeSql("INSERT INTO kontrakan(namakontrakan)
-VALUES (" +Storage.kontrakan[i]['nama']+ ")");
                 } catch (err) {
-                    console.log(Storage.kontrakan[i]['nama']);
+                    console.log(err);
                 }
             }
         });
 
+       db.transaction(function(tx){
+       for (var i = 0; i < Storage.kontrakan.length; i++){
+           try{
+       tx.executeSql("INSERT INTO kontrakan (namakontrakan, alamat, jumlahKamar, jumlahKM, harga, owner, desk)
+                                VALUES ('"+Storage.kontrakan[i]['nama']+"','"+Storage.kontrakan[i]['alamat']
+                                +"',"+Storage.kontrakan[i]['jumlahKamar']
+                                +","+Storage.kontrakan[i]['jumlahKM']+","+Storage.kontrakan[i]['harga']
+                                +",'"+Storage.kontrakan[i]['owner']
+                                +"','"+Storage.kontrakan[i]['desk']+"');");
+                }catch (err){
+                    console.log(err);
+                }
+            }
+        });
         db.transaction(function(tx){
             try {
 
