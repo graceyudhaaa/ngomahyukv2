@@ -14,8 +14,7 @@ var kos = [{'nama':'Kos Lorem',
             'harga':7350000,
             'owner':'https://www.instagram.com/sandi.laa/?hl=id',
             'desk':'kos dengan hunian sangat nyaman dan fasilitas seperti hotel',
-            'fasilitas':['Kamar','KM Dalam','AC+TV'],
-            'thumbnail':'static/Bisnis-kos-kosan.png'
+            'fasilitas':['Kamar','KM Dalam','AC+TV']
            },
            {'nama':'Kos Dolor',
             'alamat':'Jalan Dolor, No.12 RT1/RW12',
@@ -24,8 +23,7 @@ var kos = [{'nama':'Kos Lorem',
             'harga':7100000,
             'owner':'https://www.instagram.com/graceyudha/?hl=id',
             'desk':'kos dengan hunian sangat nyaman dan fasilitas seperti hotel',
-            'fasilitas':['Kamar','KM Dalam','AC+TV'],
-            'thumbnail':'static/kosku.jpg'
+            'fasilitas':['Kamar','KM Dalam','AC+TV']
            },
            {'nama':'Kos Ipsum',
             'alamat':'Jalan Ipsum, No.666 RT3/RW1',
@@ -34,8 +32,7 @@ var kos = [{'nama':'Kos Lorem',
             'harga':7000000,
             'owner':'https://www.instagram.com/wandaalifh/?hl=id',
             'desk':'kos dengan hunian sangat nyaman dan fasilitas seperti hotel',
-            'fasilitas':['Kamar','KM Dalam','AC+TV'],
-            'thumbnail':'static/kosku1.jpg'
+            'fasilitas':['Kamar','KM Dalam','AC+TV']
            },
            {'nama':'Kos Lorem',
             'alamat':'Jalan Lorem, No11 RT1/RW12',
@@ -44,8 +41,7 @@ var kos = [{'nama':'Kos Lorem',
             'harga':720000,
             'owner':'https://www.instagram.com/sandi.laa/?hl=id',
             'desk':'kos dengan hunian sangat nyaman dan fasilitas seperti hotel',
-            'fasilitas':['Kamar','KM Dalam','AC+TV'],
-            'thumbnail':'static/kos1.jpg'
+            'fasilitas':['Kamar','KM Dalam','AC+TV']
            },
            {'nama':'Kos Dolor',
             'alamat':'Jalan Dolor, No.21 RT3/RW1',
@@ -54,8 +50,7 @@ var kos = [{'nama':'Kos Lorem',
             'harga':7350000,
             'owner':'https://www.instagram.com/graceyudha/?hl=id',
             'desk':'kos dengan hunian sangat nyaman dan fasilitas seperti hotel',
-            'fasilitas':['Kamar','KM Dalam','AC+TV'],
-            'thumbnail':'static/kos2.jpg'
+            'fasilitas':['Kamar','KM Dalam','AC+TV']
            },
            {'nama':'Kos Ipsum',
             'alamat':'Jalan Ipsum, No.5 RT2/RW14',
@@ -64,8 +59,7 @@ var kos = [{'nama':'Kos Lorem',
             'harga':7150000,
             'owner':'https://www.instagram.com/wandaalifh/?hl=id',
             'desk':'kos dengan hunian sangat nyaman dan fasilitas seperti hotel',
-            'fasilitas':['Kamar','KM Dalam','AC+TV'],
-            'thumbnail':'static/kost.jpg'
+            'fasilitas':['Kamar','KM Dalam','AC+TV']
            }
         ];
 
@@ -76,8 +70,7 @@ var kontrakan = [{'nama':'Kontrakan Lorem',
             'harga':28000000,
             'owner':'https://www.instagram.com/sandi.laa/?hl=id',
             'desk':'Tempat Stategis Nyaman dan Aestetik.',
-            'fasilitas':['Kamar','KM Dalam','AC+TV'],
-            'thumbnail':'static/kontrakan1.jfif'
+            'fasilitas':['Kamar','KM Dalam','AC+TV']
            },
            {'nama':'Kontrakan Dolor',
             'alamat':'Jalan Dolor, No.2 RT1/RW2',
@@ -86,8 +79,7 @@ var kontrakan = [{'nama':'Kontrakan Lorem',
             'harga':23000000,
             'owner':'https://www.instagram.com/graceyudha/?hl=id',
             'desk':'Tempat Stategis Nyaman dan Aestetik.',
-            'fasilitas':['Kamar','KM Dalam','AC+TV'],
-            'thumbnail':'static/kontrakan2.jpg'
+            'fasilitas':['Kamar','KM Dalam','AC+TV']
            },
            {'nama':'Kontrakan Ipsum',
             'alamat':'Jalan Ipsum, No.12 RT1/RW1',
@@ -96,7 +88,6 @@ var kontrakan = [{'nama':'Kontrakan Lorem',
             'harga':35000000,
             'owner':'https://www.instagram.com/wandaalifh/?hl=id',
             'desk':'Tempat Stategis Nyaman dan Aestetik.',
-            'fasilitas':['Kamar','KM Dalam','AC+TV'],
-            'thumbnail':'static/kontrakan3.jpg'
+            'fasilitas':['Kamar','KM Dalam','AC+TV']
            }
         ];
