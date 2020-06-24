@@ -1,6 +1,9 @@
 import QtQuick 2.5
 import QtQuick.Controls 2.5
 import QtQuick.Dialogs 1.1
+import QtQuick.LocalStorage 2.0
+import "./Storage.js" as Storage
+
 
 ApplicationWindow {
     id: applicationWindow
@@ -12,9 +15,49 @@ ApplicationWindow {
     property int kosPrice
     property string kosGenderType
     property alias kosloader: kosloader
-    title: qsTr("Tabs")
+    title: qsTr("Ngomah Yuk")
     visible: true
+    property var db
 
+    Component.onCompleted: {
+        db = LocalStorage.openDatabaseSync("ngomahyuk", "1.0", "StorageDatabase", 1000000)
+
+        db.transaction(function(tx){
+//           var sql = 'CREATE TABLE IF NOT EXISTS gender(id INTEGER AUTOINCREMENT PRIMARY KEY NOT NULL, gender TEXT)';
+//            tx.executeSql(sql);
+            tx.executeSql('CREATE TABLE IF NOT EXISTS gender(gender TEXT)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS kos(namakos TEXT, alamat TEXT, jumlahKamar INTEGER, gender TEXT, harga INTEGER, owner TEXT, desk TEXT)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS kontrakan(namakontrakan TEXT, alamat TEXT, jumlahKamar INTEGER, jumlahKM INTEGER, harga INTEGER, owner TEXT, desk TEXT)');
+        });
+
+//        insert gender type for kos
+        db.transaction(function(tx){
+            for (var i = 0; i < Storage.kos.length; i++){
+                try {
+                    tx.executeSql("INSERT INTO kos (namakos, alamat, jumlahKamar, gender, harga, owner, desk)
+                                VALUES ('"+Storage.kos[i]['nama']+"','"+Storage.kos[i]['alamat']+"',"+Storage.kos[i]['jumlahKamar']+",'"+Storage.kos[i]['gender']+"',"+Storage.kos[i]['harga']+",'"+Storage.kos[i]['owner']+"','"+Storage.kos[i]['desk']+"');");
+
+                    tx.executeSql("INSERT INTO kontrakan(namakontrakan)
+VALUES (" +Storage.kontrakan[i]['nama']+ ")");
+                } catch (err) {
+                    console.log(Storage.kontrakan[i]['nama']);
+                }
+            }
+        });
+
+        db.transaction(function(tx){
+            try {
+
+                tx.executeSql("INSERT INTO gender (gender)
+                            VALUES ('Laki-laki');");
+                tx.executeSql("INSERT INTO gender (gender)
+                            VALUES ('Perempuan')");
+            } catch (err) {
+                console.log(err);
+            }
+
+        });
+    }
 
 
     // HALAMAN UTAMA

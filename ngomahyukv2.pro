@@ -43,3 +43,5 @@ DISTFILES += \
     static/kosku2.jpg \
     static/kost.jpg \
     static/rumah-kost-mahasiswa-dekat-undip-di-tembalang-selatan-semarang.jpg
+
+HEADERS +=

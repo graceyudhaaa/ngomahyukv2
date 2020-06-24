@@ -7,23 +7,22 @@
 #include <QQmlProperty>
 #include <iostream>
 #include <string>
+#include <QDebug>
 
-QSqlDatabase databaseConnection(const char* DBType, const char* DBPath){
-    QSqlDatabase db = QSqlDatabase::addDatabase(DBType);
-    db.setDatabaseName(DBPath);
-    if (db.open()){
-        std::cout<<"database connection success"<<std::endl;
-    }
 
-    return db;
-}
+
+
+
+
 
 
 int main(int argc, char *argv[])
 {
-    //    open connect to database
-    QSqlDatabase db = databaseConnection("QSQLITE", "ngomahyuk.db");
-
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("ngomahyuk.db");
+    if (db.open()){
+        std::cout<<"database connection success"<<std::endl;
+    }
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
@@ -37,6 +36,7 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
+    qDebug() << engine.offlineStoragePath();
 
     return app.exec();
 }
