@@ -28,19 +28,19 @@ ApplicationWindow {
 //           var sql = 'CREATE TABLE IF NOT EXISTS gender(id INTEGER AUTOINCREMENT PRIMARY KEY NOT NULL, gender TEXT)';
 //            tx.executeSql(sql);
             tx.executeSql('CREATE TABLE IF NOT EXISTS gender(gender TEXT)');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS kos(namakos TEXT, alamat TEXT, jumlahKamar INTEGER, gender TEXT, harga INTEGER, owner TEXT, desk TEXT)');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS kontrakan(namakontrakan TEXT, alamat TEXT, jumlahKamar INTEGER, jumlahKM INTEGER, harga INTEGER, owner TEXT, desk TEXT)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS kos(namakos TEXT, alamat TEXT, jumlahKamar INTEGER, gender TEXT, harga INTEGER, owner TEXT, desk TEXT, thumbnail TEXT)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS kontrakan(namakontrakan TEXT, alamat TEXT, jumlahKamar INTEGER, jumlahKM INTEGER, harga INTEGER, owner TEXT, desk TEXT, thumbnail TEXT)');
         });
 
 //        insert gender type for kos
         db.transaction(function(tx){
             for (var i = 0; i < Storage.kos.length; i++){
                 try {
-                    tx.executeSql("INSERT INTO kos (namakos, alamat, jumlahKamar, gender, harga, owner, desk)
+                    tx.executeSql("INSERT INTO kos (namakos, alamat, jumlahKamar, gender, harga, owner, desk, thumbnail)
                                 VALUES ('"+Storage.kos[i]['nama']+"','"+Storage.kos[i]['alamat']+"',"
                                 +Storage.kos[i]['jumlahKamar']+",'"+Storage.kos[i]['gender']+"',"
                                 +Storage.kos[i]['harga']+",'"+Storage.kos[i]['owner']
-                                +"','"+Storage.kos[i]['desk']+"');");
+                                +"','"+Storage.kos[i]['desk']+"','"+Storage.kos[i]['thumbnail']+"');");
 
                 } catch (err) {
                     console.log(err);
@@ -51,12 +51,12 @@ ApplicationWindow {
        db.transaction(function(tx){
        for (var i = 0; i < Storage.kontrakan.length; i++){
            try{
-       tx.executeSql("INSERT INTO kontrakan (namakontrakan, alamat, jumlahKamar, jumlahKM, harga, owner, desk)
+       tx.executeSql("INSERT INTO kontrakan (namakontrakan, alamat, jumlahKamar, jumlahKM, harga, owner, desk, thumbnail)
                                 VALUES ('"+Storage.kontrakan[i]['nama']+"','"+Storage.kontrakan[i]['alamat']
                                 +"',"+Storage.kontrakan[i]['jumlahKamar']
                                 +","+Storage.kontrakan[i]['jumlahKM']+","+Storage.kontrakan[i]['harga']
                                 +",'"+Storage.kontrakan[i]['owner']
-                                +"','"+Storage.kontrakan[i]['desk']+"');");
+                                +"','"+Storage.kontrakan[i]['desk']+"','"+Storage.kontrakan[i]['thumbnail']+"');");
                 }catch (err){
                     console.log(err);
                 }

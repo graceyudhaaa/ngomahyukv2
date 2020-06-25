@@ -41,19 +41,22 @@ PageBackground {
 
         db.transaction(function(tx){
            var res = tx.executeSql("SELECT * FROM kos WHERE gender = '"+comboBoxGender.currentText+"' AND harga <="+ parseInt(textFieldHarga.text));
-           for (var i; i < res.rows.length; i++){
-               listViewKos.model.append({
-                   "imagePath" :  res.rows[i].thumbnail,
-                   "kosName" : res.rows[i].namakos,
-                   "kosAlamat" : res.rows[i].alamat,
-                   "kosJumlahKamar": res.rows[i].jumlahKamar,
-                   "kosGender" : res.rows[i].gender,
-                   "kosHarga": res.rows[i].harga,
-                   "kosProfile": "KosSpec.qml",
-                   "ownerContact": res.rows[i].owner
-               });
-           }
+            for(var i = 0; i < res.rows.length; i++){
+                listViewKos.model.append({
+                    "imagePath" :  JSON.stringify(res.rows[i].thumbnail).replace(/\"/g, ""),
+                    "kosName" : res.rows[i].namakos,
+                    "kosAlamat" : res.rows[i].alamat,
+                    "kosJumlahKamar": JSON.stringify(res.rows[i].jumlahKamar),
+                    "kosGender" : res.rows[i].gender,
+                    "kosHarga": JSON.stringify(res.rows[i].harga),
+                    "kosProfile": "KosSpec.qml",
+                    "ownerContact": res.rows[i].owner
+                });
+            }
+
         });
+
+
     }
 
 
@@ -66,16 +69,6 @@ PageBackground {
         clip: true
         model: ListModel{
 //            need to be in for loop and data from database
-            listViewKos.model.append({
-                "imagePath" :  res.rows[i].thumbnail,
-                "kosName" : res.rows[i].namakos,
-                "kosAlamat" : res.rows[i].alamat,
-                "kosJumlahKamar": res.rows[i].jumlahKamar,
-                "kosGender" : res.rows[i].gender,
-                "kosHarga": res.rows[i].harga,
-                "kosProfile": "KosSpec.qml",
-                "ownerContact": res.rows[i].owner
-            });
 
            ListElement{
                 imagePath : "static/Bisnis-kos-kosan.png"
@@ -177,7 +170,7 @@ PageBackground {
                 y: 103
                 width: 373
                 height: 14
-                text: qsTr("Harga              : " + kosHarga)
+                text: qsTr("Harga              : Rp " + kosHarga)
                 wrapMode: Text.WordWrap
                 font.pixelSize: 12
                 elide: Text.ElideNone
