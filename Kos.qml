@@ -1,10 +1,13 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.3
+import QtQuick.LocalStorage 2.0
 
 PageBackground {
     id: kos
     width: 640
     height: 480
+    property var db
+
 
     Text {
         id: element
@@ -32,8 +35,38 @@ PageBackground {
 
     }
 
+    Component.onCompleted: {
+        db = LocalStorage.openDatabaseSync("ngomahyuk", "1.0", "StorageDatabase", 1000000)
+
+       db.transaction(function(tx){
+            var kosPrice
+           if (textFieldHarga.text === ""){
+               kosPrice = 0
+           } else {
+               kosPrice = parseInt(textFieldHarga.text)
+           }
+
+           var kosGenderType = comboBoxGender.currentText
+
+           var res = tx.executeSql("SELECT * FROM kos WHERE gender = '"+ kosGenderType +"' AND harga <= "+ kosPrice+" ORDER BY harga");
+            for(var i = 0; i < res.rows.length; i++){
+                listViewKos.model.append({
+                    "imagePath" :  JSON.stringify(res.rows[i].thumbnail).replace(/\"/g, ""),
+                    "kosName" : res.rows[i].namakos,
+                    "kosAlamat" : res.rows[i].alamat,
+                    "kosJumlahKamar": JSON.stringify(res.rows[i].jumlahKamar),
+                    "kosGender" : res.rows[i].gender,
+                    "kosHarga": JSON.stringify(res.rows[i].harga).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."),
+                    "kosDeskripsi": res.rows[i].desk,
+                    "ownerContact": res.rows[i].owner
+                });
+            }
+        });
+    }
+
+
     ListView {
-        id: listView
+        id: listViewKos
         x: 15
         y: 87
         width: 640
@@ -41,49 +74,20 @@ PageBackground {
         clip: true
         model: ListModel{
 //            need to be in for loop and data from database
-           ListElement{
-                imagePath : "static/Bisnis-kos-kosan.png"
-                kosName : "Kos Lorem"
-                kosAlamat : "Jalan Lorem, No. 01 RT6/RW1"
-                kosJumlahKamar: "15"
-                kosGender : "Laki-laki"
-                kosHarga: "Rp.7.350.000"
-                kosProfile: "KosSpec.qml"
-                ownerContact: "https://www.instagram.com/sandi.laa/?hl=id"
-            }
-           ListElement{
-                imagePath : "static/kosku.jpg"
-                kosName : "Kos Dolor"
-                kosAlamat : "Jalan Dolor, No. 12 RT1/RW12"
-                kosJumlahKamar: "13"
-                kosGender : "Laki-laki"
-                kosHarga: "Rp.7.100.000"
-                kosProfile: "KosSpec1.qml"
-                ownerContact: "https://www.instagram.com/graceyudha/?hl=id"
-            }
-           ListElement{
-                imagePath : "static/kosku1.jpg"
-                kosName : "Kos Ipsum"
-                kosAlamat : "Jalan Ipsum, No. 666 RT3/RW1"
-                kosJumlahKamar: "14"
-                kosGender : "Laki-laki"
-                kosHarga: "Rp.7.000.000"
-                kosProfile: "KosSpec2.qml"
-                ownerContact: "https://www.instagram.com/wandaalifh/?hl=id"
-            }
         }
 
 
 //        delegate listview template
         delegate: Item {
-            height  : 195
+            height  : 235
             width   : 640
+
             Image {
                 id: idthumbnail
-                x: 0
-                y: 1
-                width: 235
-                height: 165
+                x: 8
+                y: 12
+                width: 222
+                height: 156
                 source: imagePath
                 fillMode: Image.PreserveAspectCrop
             }
@@ -141,55 +145,43 @@ PageBackground {
                 y: 103
                 width: 373
                 height: 14
-                text: qsTr("Harga              : " + kosHarga)
+                text: qsTr("Harga              : Rp " + kosHarga)
                 wrapMode: Text.WordWrap
                 font.pixelSize: 12
                 elide: Text.ElideNone
                 font.family: "Verdana"
             }
 
-            Button {
-                id: buttonCek
-                x: 510
-                y: 131
-                width: 96
-                height: 35
-                visible: true
+            Text {
+                id: iddesk
+                x: 251
+                y: 123
+                width: 154
+                height: 14
+                text: qsTr("Deskripsi          :")
+                wrapMode: Text.WordWrap
+                elide: Text.ElideNone
+                font.pixelSize: 12
                 font.family: "Verdana"
-                font.pixelSize: 16
-                background: Rectangle{
-                    color: "#ef3644"
-                    anchors.fill: parent
 
+                Text {
+                    id: deskripsi
+                    x: 100
+                    y: 0
+                    width: 243
+                    height: 43
+                    text: qsTr(kosDeskripsi)
+                    font.family: "Verdana"
+                    wrapMode: Text.WordWrap
+                    font.pixelSize: 12
                 }
-                contentItem: Text {
-                    id: cek
-                    text: "CEK"
-                    anchors.fill: parent
-                    verticalAlignment: Text.AlignVCenter
-                    font.bold: true
-                    font.pointSize: 10
-                    horizontalAlignment: Text.AlignHCenter
-                    color: "#ffffff"
-                }
-
-                MouseArea {
-                    id: mouseAreaCek
-                    anchors.fill: parent
-                    onClicked: {
-                        kosspec.visible = true
-                        kosspec.source = kosProfile
-                    }
-                }
-
-
             }
 
             Button {
                 id: buttonHubungi
-                x: 400
-                y: 131
-                width: 96
+                x: 473
+                y: 181
+                width: 123
                 height: 35
                 font.family: "Verdana"
                 visible: true
@@ -223,29 +215,16 @@ PageBackground {
             ToolSeparator {
                 id: toolSeparator
                 x: 8
-                y: 172
+                y: 217
                 width: 600
                 height: 15
                 orientation: Qt.Horizontal
             }
 
         }
+
     }
 
-    Loader{
-        id: kosspec
-        visible: false
-        source: "KosSpec.qml"
-    }
-    Loader{
-        id: kosspec1
-        visible: false
-        source: "KosSpec1.qml"
-    }
-    Loader{
-        id: kosspec2
-        visible: false
-        source: "KosSpec2.qml"
-    }
+
 }
 

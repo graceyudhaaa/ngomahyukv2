@@ -1,21 +1,67 @@
 import QtQuick 2.5
 import QtQuick.Controls 2.5
 import QtQuick.Dialogs 1.1
+import QtQuick.LocalStorage 2.0
+import "./Storage.js" as Storage
 
 ApplicationWindow {
     id: applicationWindow
     width: 640
     height: 480
+    property alias textFieldJumlahKamar: textFieldJumlahKamar
+    property alias textFieldHargaKontrakan: textFieldHargaKontrakan
+    property alias textFieldHarga: textFieldHarga
+    property alias comboBoxGender: comboBoxGender
     property alias kontrakanloader: kontrakanloader
     property int kontrakanJumlahKamar
     property int kontrakanPrice
     property int kosPrice
     property string kosGenderType
     property alias kosloader: kosloader
-    title: qsTr("Tabs")
+    title: qsTr("Ngomah Yuk")
     visible: true
+    property var db
 
 
+    Component.onCompleted: {
+        db = LocalStorage.openDatabaseSync("ngomahyuk", "1.0", "StorageDatabase", 1000000)
+
+        db.transaction(function(tx){
+            tx.executeSql('CREATE TABLE IF NOT EXISTS kos(namakos TEXT, alamat TEXT, jumlahKamar INTEGER, gender TEXT, harga INTEGER, owner TEXT, desk TEXT, thumbnail TEXT)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS kontrakan(namakontrakan TEXT, alamat TEXT, jumlahKamar INTEGER, jumlahKM INTEGER, harga INTEGER, owner TEXT, desk TEXT, thumbnail TEXT)');
+        });
+
+//        insert gender type for kos
+        db.transaction(function(tx){
+            for (var i = 0; i < Storage.kos.length; i++){
+                try {
+                    tx.executeSql("INSERT INTO kos (namakos, alamat, jumlahKamar, gender, harga, owner, desk, thumbnail)
+                                VALUES ('"+Storage.kos[i]['nama']+"','"+Storage.kos[i]['alamat']+"',"
+                                +Storage.kos[i]['jumlahKamar']+",'"+Storage.kos[i]['gender']+"',"
+                                +Storage.kos[i]['harga']+",'"+Storage.kos[i]['owner']
+                                +"','"+Storage.kos[i]['desk']+"','"+Storage.kos[i]['thumbnail']+"');");
+
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+        });
+
+       db.transaction(function(tx){
+       for (var i = 0; i < Storage.kontrakan.length; i++){
+           try{
+       tx.executeSql("INSERT INTO kontrakan (namakontrakan, alamat, jumlahKamar, jumlahKM, harga, owner, desk, thumbnail)
+                                VALUES ('"+Storage.kontrakan[i]['nama']+"','"+Storage.kontrakan[i]['alamat']
+                                +"',"+Storage.kontrakan[i]['jumlahKamar']
+                                +","+Storage.kontrakan[i]['jumlahKM']+","+Storage.kontrakan[i]['harga']
+                                +",'"+Storage.kontrakan[i]['owner']
+                                +"','"+Storage.kontrakan[i]['desk']+"','"+Storage.kontrakan[i]['thumbnail']+"');");
+                }catch (err){
+                    console.log(err);
+                }
+            }
+        });
+    }
 
     // HALAMAN UTAMA
 
@@ -61,6 +107,10 @@ ApplicationWindow {
                 id: mouseAreaHubungi
                 anchors.fill: parent
                 onClicked: {
+                    db.transaction(function(tx){
+                        tx.executeSql("DROP TABLE kos");
+                        tx.executeSql("DROP TABLE kontrakan");
+                    });
                     Qt.quit()
                 }
             }
@@ -103,17 +153,15 @@ ApplicationWindow {
                 kosloader.active = true
                 kosloader.visible = true
 
-                if (kosGenderType == "Laki-laki" && kosPrice >= 7350000){
-                    kosloader.source = "Kos.qml"
-                }else if (kosGenderType == "Perempuan" && kosPrice >= 7350000){
-                    kosloader.source = "KosPerempuan.qml"
-                }else {
-                    alertDialogKos.open()
-                }
+                db.transaction(function(tx){
+                    var res = tx.executeSql("SELECT * FROM kos WHERE gender = '"+kosGenderType+"' AND harga <="+ kosPrice);
 
-
-                console.log(kosPrice)
-                console.log(kosGenderType)
+                    if (res.rows.length === 0){
+                        alertDialogKos.open();
+                    }else {
+                        kosloader.source = "Kos.qml"
+                    }
+                });
             }
         }
 
@@ -281,7 +329,6 @@ ApplicationWindow {
         anchors.topMargin: 138
         anchors.left: toolSeparator.right
         anchors.leftMargin: 100
-        placeholderText: "Kosongkan jika tidak tertentu"
     }
 
     Button {
@@ -328,16 +375,18 @@ ApplicationWindow {
                     kontrakanJumlahKamar = parseInt(textFieldJumlahKamar.text)
                 }
 
-                if (kontrakanPrice >= 35000000){
-                    kontrakanloader.source = "Kontrakan.qml"
-                }else {
-                    alertDialogKontrakan.open()
-                }
+                db.transaction(function(tx){
+                    var res = tx.executeSql("SELECT * FROM kontrakan WHERE jumlahKamar <= "+kontrakanJumlahKamar+" AND harga <="+ kontrakanPrice);
+
+                    if (res.rows.length === 0){
+                        alertDialogKos.open();
+                    }else {
+                        kontrakanloader.source = "Kontrakan.qml"
+                    }
+                });
 
                 kontrakanloader.active = true
                 kontrakanloader.visible = true
-                console.log(kontrakanPrice)
-                console.log(kontrakanJumlahKamar)
             }
         }
     }
