@@ -343,7 +343,6 @@ ApplicationWindow {
         anchors.topMargin: 138
         anchors.left: toolSeparator.right
         anchors.leftMargin: 100
-        placeholderText: "Kosongkan jika tidak tertentu"
     }
 
     Button {
