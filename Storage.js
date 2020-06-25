@@ -1,11 +1,11 @@
-//.import QtQuick.LocalStorage 2.0 as Sql
+.import QtQuick.LocalStorage 2.0 as Sql
 
 //// First, let's create a short helper function to get the database connection
-//function getDatabase() {
-//     return Sql.LocalStorage.openDatabaseSync("ngomahyuk", "0.1", "StorageDatabase", 100000);
+function getDatabase() {
+     return Sql.LocalStorage.openDatabaseSync("ngomahyuk", "0.1", "StorageDatabase", 100000);
 
 
-//}
+}
 
 var kos = [{'nama':'Kos Lorem',
             'alamat':'Jalan Lorem, No.01 RT6/RW1',

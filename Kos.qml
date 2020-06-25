@@ -1,10 +1,14 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.3
+import QtQuick.LocalStorage 2.0
+import "./Storage.js" as Storage
 
 PageBackground {
     id: kos
     width: 640
     height: 480
+    property var db
+
 
     Text {
         id: element
@@ -32,8 +36,29 @@ PageBackground {
 
     }
 
+    Component.onCompleted: {
+        db = LocalStorage.openDatabaseSync("ngomahyuk", "1.0", "StorageDatabase", 1000000)
+
+        db.transaction(function(tx){
+           var res = tx.executeSql("SELECT * FROM kos WHERE gender = '"+comboBoxGender.currentText+"' AND harga <="+ parseInt(textFieldHarga.text));
+           for (var i; i < res.rows.length; i++){
+               listViewKos.model.append({
+                   "imagePath" :  res.rows[i].thumbnail,
+                   "kosName" : res.rows[i].namakos,
+                   "kosAlamat" : res.rows[i].alamat,
+                   "kosJumlahKamar": res.rows[i].jumlahKamar,
+                   "kosGender" : res.rows[i].gender,
+                   "kosHarga": res.rows[i].harga,
+                   "kosProfile": "KosSpec.qml",
+                   "ownerContact": res.rows[i].owner
+               });
+           }
+        });
+    }
+
+
     ListView {
-        id: listView
+        id: listViewKos
         x: 15
         y: 87
         width: 640
@@ -41,6 +66,17 @@ PageBackground {
         clip: true
         model: ListModel{
 //            need to be in for loop and data from database
+            listViewKos.model.append({
+                "imagePath" :  res.rows[i].thumbnail,
+                "kosName" : res.rows[i].namakos,
+                "kosAlamat" : res.rows[i].alamat,
+                "kosJumlahKamar": res.rows[i].jumlahKamar,
+                "kosGender" : res.rows[i].gender,
+                "kosHarga": res.rows[i].harga,
+                "kosProfile": "KosSpec.qml",
+                "ownerContact": res.rows[i].owner
+            });
+
            ListElement{
                 imagePath : "static/Bisnis-kos-kosan.png"
                 kosName : "Kos Lorem"
@@ -231,6 +267,7 @@ PageBackground {
 
         }
     }
+
 
     Loader{
         id: kosspec

@@ -9,6 +9,8 @@ ApplicationWindow {
     id: applicationWindow
     width: 640
     height: 480
+    property alias textFieldHarga: textFieldHarga
+    property alias comboBoxGender: comboBoxGender
     property alias kontrakanloader: kontrakanloader
     property int kontrakanJumlahKamar
     property int kontrakanPrice
@@ -76,9 +78,6 @@ ApplicationWindow {
 
 
     // HALAMAN UTAMA
-
-
-
     BorderImage {
         id: borderImage
         height: 198
@@ -120,6 +119,11 @@ ApplicationWindow {
                 anchors.fill: parent
                 onClicked: {
                     Qt.quit()
+                    db.transaction(function(tx){
+                        tx.executeSql("DROP TABLE kos");
+                        tx.executeSql("DROP TABLE kontrakan");
+                        tx.executeSql("DROP TABLE gender");
+                    });
                 }
             }
         }
@@ -161,7 +165,11 @@ ApplicationWindow {
                 kosloader.active = true
                 kosloader.visible = true
 
+
+
                 if (kosGenderType == "Laki-laki" && kosPrice >= 7350000){
+
+
                     kosloader.source = "Kos.qml"
                 }else if (kosGenderType == "Perempuan" && kosPrice >= 7350000){
                     kosloader.source = "KosPerempuan.qml"
@@ -170,8 +178,8 @@ ApplicationWindow {
                 }
 
 
-                console.log(kosPrice)
-                console.log(kosGenderType)
+//                console.log(kosPrice)
+//                console.log(kosGenderType)
             }
         }
 
