@@ -56,7 +56,7 @@ PageBackground {
         }
 
         db.transaction(function(tx){
-            var res = tx.executeSql("SELECT * FROM kontrakan WHERE jumlahKamar <= "+kontrakanJumlahKamar+" AND harga <="+ kontrakanPrice);
+            var res = tx.executeSql("SELECT * FROM kontrakan WHERE jumlahKamar <= "+kontrakanJumlahKamar+" AND harga <="+ kontrakanPrice + " ORDER BY harga");
 
             for(var i = 0; i < res.rows.length; i++)
             listViewKontrakan.model.append({

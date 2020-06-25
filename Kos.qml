@@ -49,7 +49,7 @@ PageBackground {
 
            var kosGenderType = comboBoxGender.currentText
 
-           var res = tx.executeSql("SELECT * FROM kos WHERE gender = '"+ kosGenderType +"' AND harga <= '"+ kosPrice+"'");
+           var res = tx.executeSql("SELECT * FROM kos WHERE gender = '"+ kosGenderType +"' AND harga <= "+ kosPrice+" ORDER BY harga");
             for(var i = 0; i < res.rows.length; i++){
                 listViewKos.model.append({
                     "imagePath" :  JSON.stringify(res.rows[i].thumbnail).replace(/\"/g, ""),
@@ -57,7 +57,7 @@ PageBackground {
                     "kosAlamat" : res.rows[i].alamat,
                     "kosJumlahKamar": JSON.stringify(res.rows[i].jumlahKamar),
                     "kosGender" : res.rows[i].gender,
-                    "kosHarga": JSON.stringify(res.rows[i].harga),
+                    "kosHarga": JSON.stringify(res.rows[i].harga).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."),
                     "kosProfile": "KosSpec.qml",
                     "ownerContact": res.rows[i].owner
                 });
