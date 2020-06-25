@@ -40,7 +40,7 @@ PageBackground {
         db = LocalStorage.openDatabaseSync("ngomahyuk", "1.0", "StorageDatabase", 1000000)
 
         db.transaction(function(tx){
-           var res = tx.executeSql("SELECT * FROM kos WHERE gender = '"+comboBoxGender.currentText+"' AND harga <="+ parseInt(textFieldHarga.text));
+           var res = tx.executeSql("SELECT * FROM kos WHERE gender = '"+ comboBoxGender.currentText +"' AND harga <="+ parseInt(textFieldHarga.text));
             for(var i = 0; i < res.rows.length; i++){
                 listViewKos.model.append({
                     "imagePath" :  JSON.stringify(res.rows[i].thumbnail).replace(/\"/g, ""),
@@ -55,8 +55,6 @@ PageBackground {
             }
 
         });
-
-
     }
 
 
@@ -69,37 +67,6 @@ PageBackground {
         clip: true
         model: ListModel{
 //            need to be in for loop and data from database
-
-           ListElement{
-                imagePath : "static/Bisnis-kos-kosan.png"
-                kosName : "Kos Lorem"
-                kosAlamat : "Jalan Lorem, No. 01 RT6/RW1"
-                kosJumlahKamar: "15"
-                kosGender : "Laki-laki"
-                kosHarga: "Rp.7.350.000"
-                kosProfile: "KosSpec.qml"
-                ownerContact: "https://www.instagram.com/sandi.laa/?hl=id"
-            }
-           ListElement{
-                imagePath : "static/kosku.jpg"
-                kosName : "Kos Dolor"
-                kosAlamat : "Jalan Dolor, No. 12 RT1/RW12"
-                kosJumlahKamar: "13"
-                kosGender : "Laki-laki"
-                kosHarga: "Rp.7.100.000"
-                kosProfile: "KosSpec1.qml"
-                ownerContact: "https://www.instagram.com/graceyudha/?hl=id"
-            }
-           ListElement{
-                imagePath : "static/kosku1.jpg"
-                kosName : "Kos Ipsum"
-                kosAlamat : "Jalan Ipsum, No. 666 RT3/RW1"
-                kosJumlahKamar: "14"
-                kosGender : "Laki-laki"
-                kosHarga: "Rp.7.000.000"
-                kosProfile: "KosSpec2.qml"
-                ownerContact: "https://www.instagram.com/wandaalifh/?hl=id"
-            }
         }
 
 

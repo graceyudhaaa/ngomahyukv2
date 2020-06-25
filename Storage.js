@@ -43,7 +43,7 @@ var kos = [{'nama':'Kos Lorem',
             'owner':'https://www.instagram.com/sandi.laa/?hl=id',
             'desk':'kos dengan hunian sangat nyaman dan fasilitas seperti hotel',
             'fasilitas':['Kamar','KM Dalam','AC+TV'],
-            'thumbnail': 'static/Bisnis-kos-kosan.png'
+            'thumbnail': 'static/kos1.jpg'
            },
            {'nama':'Kos Dolor',
             'alamat':'Jalan Dolor, No.21 RT3/RW1',
@@ -53,7 +53,7 @@ var kos = [{'nama':'Kos Lorem',
             'owner':'https://www.instagram.com/graceyudha/?hl=id',
             'desk':'kos dengan hunian sangat nyaman dan fasilitas seperti hotel',
             'fasilitas':['Kamar','KM Dalam','AC+TV'],
-            'thumbnail': 'static/Bisnis-kos-kosan.png'
+            'thumbnail': 'static/kos2.jpg'
            },
            {'nama':'Kos Ipsum',
             'alamat':'Jalan Ipsum, No.5 RT2/RW14',
@@ -63,7 +63,7 @@ var kos = [{'nama':'Kos Lorem',
             'owner':'https://www.instagram.com/wandaalifh/?hl=id',
             'desk':'kos dengan hunian sangat nyaman dan fasilitas seperti hotel',
             'fasilitas':['Kamar','KM Dalam','AC+TV'],
-            'thumbnail': 'static/Bisnis-kos-kosan.png'
+            'thumbnail': 'static/kost.jpg'
            }
         ];
 
@@ -75,7 +75,7 @@ var kontrakan = [{'nama':'Kontrakan Lorem',
             'owner':'https://www.instagram.com/sandi.laa/?hl=id',
             'desk':'Tempat Stategis Nyaman dan Aestetik.',
             'fasilitas':['Kamar','KM Dalam','AC+TV'],
-            'thumbnail': 'static/Bisnis-kos-kosan.png'
+            'thumbnail': 'static/kontrakan1.jfif'
            },
            {'nama':'Kontrakan Dolor',
             'alamat':'Jalan Dolor, No.2 RT1/RW2',
@@ -85,7 +85,7 @@ var kontrakan = [{'nama':'Kontrakan Lorem',
             'owner':'https://www.instagram.com/graceyudha/?hl=id',
             'desk':'Tempat Stategis Nyaman dan Aestetik.',
             'fasilitas':['Kamar','KM Dalam','AC+TV'],
-            'thumbnail': 'static/Bisnis-kos-kosan.png'
+            'thumbnail': 'static/kontrakan2.jpg'
            },
            {'nama':'Kontrakan Ipsum',
             'alamat':'Jalan Ipsum, No.12 RT1/RW1',
@@ -95,7 +95,7 @@ var kontrakan = [{'nama':'Kontrakan Lorem',
             'owner':'https://www.instagram.com/wandaalifh/?hl=id',
             'desk':'Tempat Stategis Nyaman dan Aestetik.',
             'fasilitas':['Kamar','KM Dalam','AC+TV'],
-            'thumbnail': 'static/Bisnis-kos-kosan.png'
+            'thumbnail': 'static/kontrakan3.jpg'
            }
         ];
 

@@ -1,10 +1,14 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.3
+import QtQuick.LocalStorage 2.0
+import "./Storage.js" as Storage
 
 PageBackground {
     id: kontrakan
     width: 640
     height: 480
+    property var db
+
 
     Text {
         id: element
@@ -27,11 +31,37 @@ PageBackground {
             anchors.leftMargin: 0
             anchors.topMargin: 0
             anchors.fill: parent
-            onClicked: kontrakanloader.source = ""
+            onClicked: {
+                kontrakanloader.source = ""
+            }
+
         }
     }
+
+    Component.onCompleted: {
+        db = LocalStorage.openDatabaseSync("ngomahyuk", "1.0", "StorageDatabase", 1000000);
+
+        db.transaction(function(tx){
+            var res = tx.executeSql("SELECT * FROM kontrakan WHERE jumlahKamar <= "+kontrakanJumlahKamar+" AND harga <="+ kontrakanPrice);
+
+            for(var i = 0; i < res.rows.length; i++)
+            listViewKontrakan.model.append({
+                "imagePath" :  JSON.stringify(res.rows[i].thumbnail).replace(/\"/g, ""),
+                "kontrakanName" : res.rows[i].namakontrakan,
+                "kontrakanAlamat" : res.rows[i].alamat,
+                "kontrakanJumlahKamar": JSON.stringify(res.rows[i].jumlahKamar),
+                "kontrakanJumlahKM" : JSON.stringify(res.rows[i].jumlahKM),
+                "kontrakanHarga": JSON.stringify(res.rows[i].harga),
+                "kontrakanProfile": "KontrakanSpec.qml",
+                "ownerContact": res.rows[i].owner
+            });;
+        });
+    }
+
+
+
     ListView {
-        id: listView
+        id: listViewKontrakan
         x: 15
         y: 87
         width: 640
@@ -39,36 +69,6 @@ PageBackground {
         clip: true
         model: ListModel{
 //            need to be in for loop and data from database
-           ListElement{
-                imagePath : "static/kontrakan1.jfif"
-                kontrakanName : "Kontrakan Lorem"
-                kontrakanAlamat : "Jalan Lorem, No. 3 RT6/RW4"
-                kontrakanJumlahKamar: "3"
-                kontrakanJumlahKM : "2"
-                kontrakanHarga: "Rp.28.000.000"
-                kontrakanProfile: "KontrakanSpec.qml"
-                ownerContact: "https://www.instagram.com/sandi.laa/?hl=id"
-            }
-           ListElement{
-                imagePath : "static/kontrakan2.jpg"
-                kontrakanName : "Kontrakan Dolor"
-                kontrakanAlamat : "Jalan Dolor, No. 2 RT1/RW21"
-                kontrakanJumlahKamar: "3"
-                kontrakanJumlahKM : "2"
-                kontrakanHarga: "Rp.23.000.000"
-                kontrakanProfile: "KontrakanSpec1.qml"
-                ownerContact: "https://www.instagram.com/graceyudha/?hl=id"
-            }
-           ListElement{
-                imagePath : "static/kontrakan3.jpg"
-                kontrakanName : "Kontrakan Ipsum"
-                kontrakanAlamat : "Jalan Ipsum, No. 12 RT1/RW1"
-                kontrakanJumlahKamar: "4"
-                kontrakanJumlahKM : "3"
-                kontrakanHarga: "Rp.35.000.000"
-                kontrakanProfile: "KontrakanSpec2.qml"
-                ownerContact: "https://www.instagram.com/wandaalifh/?hl=id"
-            }
         }
 
 //        delegate listview template
@@ -212,7 +212,7 @@ PageBackground {
                     id: mouseAreaHubungi
                     anchors.fill: parent
                     onClicked: {
-                        Qt.openUrlExternally (ownerContact);
+                        Qt.openUrlExternally(ownerContact);
                     }
                 }
             }

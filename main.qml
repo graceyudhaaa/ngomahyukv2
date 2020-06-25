@@ -9,6 +9,8 @@ ApplicationWindow {
     id: applicationWindow
     width: 640
     height: 480
+    property alias textFieldJumlahKamar: textFieldJumlahKamar
+    property alias textFieldHargaKontrakan: textFieldHargaKontrakan
     property alias textFieldHarga: textFieldHarga
     property alias comboBoxGender: comboBoxGender
     property alias kontrakanloader: kontrakanloader
@@ -165,21 +167,15 @@ ApplicationWindow {
                 kosloader.active = true
                 kosloader.visible = true
 
+                db.transaction(function(tx){
+                    var res = tx.executeSql("SELECT * FROM kos WHERE gender = '"+comboBoxGender.currentText+"' AND harga <="+ parseInt(textFieldHarga.text));
 
-
-                if (kosGenderType == "Laki-laki" && kosPrice >= 7350000){
-
-
-                    kosloader.source = "Kos.qml"
-                }else if (kosGenderType == "Perempuan" && kosPrice >= 7350000){
-                    kosloader.source = "KosPerempuan.qml"
-                }else {
-                    alertDialogKos.open()
-                }
-
-
-//                console.log(kosPrice)
-//                console.log(kosGenderType)
+                    if (res.rows.length === 0){
+                        alertDialogKos.open();
+                    }else {
+                        kosloader.source = "Kos.qml"
+                    }
+                });
             }
         }
 
@@ -394,16 +390,20 @@ ApplicationWindow {
                     kontrakanJumlahKamar = parseInt(textFieldJumlahKamar.text)
                 }
 
-                if (kontrakanPrice >= 35000000){
-                    kontrakanloader.source = "Kontrakan.qml"
-                }else {
-                    alertDialogKontrakan.open()
-                }
+                db.transaction(function(tx){
+                    var res = tx.executeSql("SELECT * FROM kontrakan WHERE jumlahKamar <= "+kontrakanJumlahKamar+" AND harga <="+ kontrakanPrice);
+
+                    if (res.rows.length === 0){
+                        alertDialogKos.open();
+                    }else {
+                        kontrakanloader.source = "Kontrakan.qml"
+                    }
+                });
 
                 kontrakanloader.active = true
                 kontrakanloader.visible = true
-                console.log(kontrakanPrice)
-                console.log(kontrakanJumlahKamar)
+//                console.log(kontrakanPrice)
+//                console.log(kontrakanJumlahKamar)
             }
         }
     }
