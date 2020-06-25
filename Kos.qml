@@ -39,8 +39,17 @@ PageBackground {
     Component.onCompleted: {
         db = LocalStorage.openDatabaseSync("ngomahyuk", "1.0", "StorageDatabase", 1000000)
 
-        db.transaction(function(tx){
-           var res = tx.executeSql("SELECT * FROM kos WHERE gender = '"+ comboBoxGender.currentText +"' AND harga <="+ parseInt(textFieldHarga.text));
+       db.transaction(function(tx){
+            var kosPrice
+           if (textFieldHarga.text === ""){
+               kosPrice = 0
+           } else {
+               kosPrice = parseInt(textFieldHarga.text)
+           }
+
+           var kosGenderType = comboBoxGender.currentText
+
+           var res = tx.executeSql("SELECT * FROM kos WHERE gender = '"+ kosGenderType +"' AND harga <= '"+ kosPrice+"'");
             for(var i = 0; i < res.rows.length; i++){
                 listViewKos.model.append({
                     "imagePath" :  JSON.stringify(res.rows[i].thumbnail).replace(/\"/g, ""),
@@ -53,7 +62,6 @@ PageBackground {
                     "ownerContact": res.rows[i].owner
                 });
             }
-
         });
     }
 

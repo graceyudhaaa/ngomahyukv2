@@ -41,6 +41,20 @@ PageBackground {
     Component.onCompleted: {
         db = LocalStorage.openDatabaseSync("ngomahyuk", "1.0", "StorageDatabase", 1000000);
 
+        var kontrakanPrice
+        if (textFieldHargaKontrakan.text === ""){
+            kontrakanPrice = 0
+        } else {
+            kontrakanPrice = parseInt(textFieldHargaKontrakan.text)
+        }
+
+        var kontrakanJumlahKamar
+        if (textFieldJumlahKamar.text === ""){
+            kontrakanJumlahKamar = 0
+        } else {
+            kontrakanJumlahKamar = parseInt(textFieldJumlahKamar.text)
+        }
+
         db.transaction(function(tx){
             var res = tx.executeSql("SELECT * FROM kontrakan WHERE jumlahKamar <= "+kontrakanJumlahKamar+" AND harga <="+ kontrakanPrice);
 

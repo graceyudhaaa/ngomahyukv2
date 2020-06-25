@@ -168,7 +168,7 @@ ApplicationWindow {
                 kosloader.visible = true
 
                 db.transaction(function(tx){
-                    var res = tx.executeSql("SELECT * FROM kos WHERE gender = '"+comboBoxGender.currentText+"' AND harga <="+ parseInt(textFieldHarga.text));
+                    var res = tx.executeSql("SELECT * FROM kos WHERE gender = '"+kosGenderType+"' AND harga <="+ kosPrice);
 
                     if (res.rows.length === 0){
                         alertDialogKos.open();
